@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Никита 🌷 Той самой...</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: 'Segoe UI', 'Helvetica Neue', system-ui, -apple-system, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            
+            /* Благородный переливающийся градиент */
+            background: radial-gradient(circle at 30% 30%, #ffe6f0, #f3d9f1, #f0c4e5, #e8c3e6, #d9b0d9);
+            background-size: 400% 400%;
+            animation: dreamyGradient 12s ease infinite;
+            
+            padding: 20px;
+        }
+
+        @keyframes dreamyGradient {
+            0% { background-position: 0% 0%; }
+            25% { background-position: 100% 0%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+
+        /* Изящные блестки поверх фона */
+        body::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><circle cx="4" cy="6" r="1.5" fill="%23ffffff" opacity="0.4"/><circle cx="22" cy="12" r="2" fill="%23ffd9f0" opacity="0.5"/><circle cx="15" cy="25" r="1.2" fill="%23f4b8e4" opacity="0.6"/><circle cx="27" cy="20" r="1" fill="%23ffe2f5" opacity="0.7"/></svg>');
+            opacity: 0.5;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .main-wrapper {
+            width: 100%;
+            max-width: 700px;
+            position: relative;
+            z-index: 10;
+            margin: 20px auto;
+        }
+
+        /* Основная карточка - невесомая, перламутровая */
+        .love-card {
+            background: rgba(255, 245, 250, 0.3);
+            backdrop-filter: blur(18px) saturate(180%);
+            -webkit-backdrop-filter: blur(18px) saturate(180%);
+            border-radius: 70px 70px 70px 70px / 60px 60px 60px 60px;
+            padding: 35px 25px;
+            box-shadow: 
+                0 30px 50px rgba(180, 100, 140, 0.25),
+                0 0 0 2px rgba(255, 220, 240, 0.7) inset,
+                0 0 40px rgba(255, 200, 230, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            transition: all 0.3s ease;
+        }
+
+        /* Шапка с именем */
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #8b5e8b;
+            text-shadow: 0 0 15px #fff0fa, 0 4px 10px #ffbfd7;
+            letter-spacing: 2px;
+            word-break: break-word;
+        }
+
+        .header .to-name {
+            font-size: 2.8rem;
+            background: linear-gradient(135deg, #ed9ec9, #b984b0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            display: inline-block;
+            filter: drop-shadow(0 5px 10px #ffc1dc);
+            margin-bottom: 10px;
+        }
+
+        .divider {
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ffbfe5, #d9a3d9, #ffbfe5, transparent);
+            width: 80%;
+            margin: 15px auto;
+            border-radius: 10px;
+        }
+
+        /* Прогресс (красивые шаги) */
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 15px 0 20px;
+            flex-wrap: wrap;
+        }
+
+        .step-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: rgba(255, 200, 230, 0.7);
+            border: 2px solid white;
+            box-shadow: 0 0 10px #ffc1dc;
+            transition: all 0.3s ease;
+        }
+
+        .step-dot.active {
+            background: #f29bc0;
+            transform: scale(1.4);
+            box-shadow: 0 0 20px #ff73b0;
+            border-color: #fff5fb;
+        }
+
+        /* Область вопроса - главная */
+        .question-area {
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .question-text {
+            font-size: 1.9rem;
+            line-height: 1.3;
+            color: #793f6e;
+            margin-bottom: 30px;
+            font-weight: 500;
+            text-align: center;
+            padding: 0 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 80px;
+            padding: 15px 20px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 5px 15px rgba(255, 190, 220, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .question-emoji {
+            font-size: 2rem;
+            margin-right: 10px;
+            filter: drop-shadow(0 2px 5px hotpink);
+        }
+
+        /* Карточки вариантов (изящные, игривые) */
+        .options-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 100%;
+            margin: 10px 0 15px;
+        }
+
+        .option-item {
+            background: rgba(255, 240, 250, 0.6);
+            backdrop-filter: blur(8px);
+            border: 2px solid rgba(255, 210, 235, 0.9);
+            border-radius: 60px;
+            padding: 18px 22px;
+            font-size: 1.25rem;
+            color: #643a60;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 5px 10px rgba(210, 150, 190, 0.2);
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .option-item:hover {
+            background: #ffe2f2;
+            border-color: #f59fc7;
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 20px 25px -10px #e79ac0;
+        }
+
+        .option-emoji {
+            font-size: 2rem;
+            min-width: 50px;
+            text-align: center;
+            filter: drop-shadow(0 2px 5px #ffa5d0);
+        }
+
+        /* Результат - кульминация */
+        .result-area {
+            text-align: center;
+            padding: 15px 10px;
+        }
+
+        .result-badge {
+            background: rgba(255, 240, 250, 0.7);
+            backdrop-filter: blur(5px);
+            border-radius: 110px;
+            padding: 25px 15px;
+            border: 3px dashed #feb0d0;
+            margin: 15px 0;
+        }
+
+        .result-emoji-large {
+            font-size: 5rem;
+            line-height: 1.2;
+            filter: drop-shadow(0 10px 15px #faaacb);
+            animation: float 3s ease infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .result-title {
+            font-size: 3rem;
+            background: linear-gradient(145deg, #bb6b9e, #e676a5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            margin: 15px 0 10px;
+            text-shadow: 0 5px 20px #ffbedd;
+        }
+
+        .result-desc {
+            font-size: 1.4rem;
+            color: #764b74;
+            margin: 15px 0;
+            font-style: italic;
+            background: rgba(255, 220, 240, 0.4);
+            padding: 15px;
+            border-radius: 40px;
+            border: 1px solid white;
+        }
+
+        .reset-button {
+            background: rgba(255, 230, 245, 0.8);
+            border: 2px solid #f5b0cf;
+            border-radius: 60px;
+            padding: 16px 35px;
+            font-size: 1.3rem;
+            color: #904e81;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+            margin-top: 30px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 0 #e0a0c0;
+        }
+
+        .reset-button:hover {
+            background: #ffe0f0;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 0 #e0a0c0, 0 15px 25px #fbb0d0;
+        }
+
+        .signature {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 1.7rem;
+            color: #a15f85;
+            text-shadow: 0 2px 10px white;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 60px;
+            padding: 12px 20px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .signature span {
+            font-size: 2.2rem;
+            display: inline-block;
+            animation: sparkle 2s infinite;
+        }
+
+        @keyframes sparkle {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); text-shadow: 0 0 15px gold; }
+        }
+
+        /* Адаптивность */
+        @media (max-width: 500px) {
+            .question-text { font-size: 1.5rem; }
+            .option-item { font-size: 1rem; padding: 15px; }
+            .result-title { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-wrapper">
+        <div class="love-card" id="loveCard">
+            <!-- Шапка с именем -->
+            <div class="header">
+                <div class="to-name">🌷 Моя Любимая 🌷</div>
+                <h1>С 8 Марта,<br>родная!</h1>
+                <div class="divider"></div>
+            </div>
+
+            <!-- Индикаторы шагов (красивые точечки) -->
+            <div class="step-indicator" id="stepIndicator"></div>
+
+            <!-- Контейнер для динамического контента (вопросы/результат) -->
+            <div id="dynamicContent"></div>
+
+            <!-- Подпись от Никиты (всегда внизу) -->
+            <div class="signature">
+                <span>💗</span> Твой Никита <span>💗</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // === Игривый, нежный тест с 5 вопросами о ней ===
+            const questions = [
+                {
+                    emoji: "☀️",
+                    text: "С каким настроением ты проснулась?",
+                    options: [
+                        { emoji: "🦋", text: "Как бабочка — легко и игриво", next: 1 },
+                        { emoji: "🌺", text: "Нежно, словно лепесток розы", next: 1 },
+                        { emoji: "😼", text: "С хитринкой, хочется шалостей", next: 1 },
+                        { emoji: "👑", text: "Как королева — величественно", next: 1 }
+                    ]
+                },
+                {
+                    emoji: "🍓",
+                    text: "Что тебе сейчас хочется больше всего?",
+                    options: [
+                        { emoji: "🍬", text: "Сладких комплиментов и обнимашек", next: 2 },
+                        { emoji: "✨", text: "Немного волшебства и сюрпризов", next: 2 },
+                        { emoji: "💃", text: "Танцевать и дурачиться", next: 2 },
+                        { emoji: "🍫", text: "Загадочного вечера при свечах", next: 2 }
+                    ]
+                },
+                {
+                    emoji: "🌸",
+                    text: "Какая ты сегодня в общении?",
+                    options: [
+                        { emoji: "🎀", text: "Нежная и кокетливая", next: 3 },
+                        { emoji: "🔥", text: "Озорная и зажигательная", next: 3 },
+                        { emoji: "💭", text: "Мечтательная, в своих мыслях", next: 3 },
+                        { emoji: "🎭", text: "Загадочная, с секретиком", next: 3 }
+                    ]
+                },
+                {
+                    emoji: "🍭",
+                    text: "Какое лакомство отражает твоё настроение?",
+                    options: [
+                        { emoji: "🍰", text: "Воздушный десерт — безе", next: 4 },
+                        { emoji: "🍒", text: "Сочная вишня в шоколаде", next: 4 },
+                        { emoji: "🍦", text: "Мороженое с посыпкой", next: 4 },
+                        { emoji: "🥂", text: "Игристое, с пузырьками", next: 4 }
+                    ]
+                },
+                {
+                    emoji: "💕",
+                    text: "Завершающий штрих: какая ты сегодня?",
+                    options: [
+                        { emoji: "👸", text: "Принцесса, достойная восхищения", result: 0 },
+                        { emoji: "🧚‍♀️", text: "Фея, исполняющая желания", result: 1 },
+                        { emoji: "🐈⬛", text: "Таинственная незнакомка", result: 2 },
+                        { emoji: "☀️", text: "Солнечный зайчик", result: 3 }
+                    ]
+                }
+            ];
+
+            // Результаты (4 варианта — игривые и нежные образы)
+            const results = [
+                { 
+                    title: "Сияющая Принцесса", 
+                    desc: "Ты сегодня невероятно нежная и величественная. Хочется носить тебя на руках и осыпать лепестками роз!",
+                    emoji: "👑🌷"
+                },
+                { 
+                    title: "Озорная Фея-шалунья", 
+                    desc: "Искристая, весёлая, чуточку хулиганка — с тобой мир играет яркими красками. Берегись, кто попадётся на пути!",
+                    emoji: "🧚‍♀️✨"
+                },
+                { 
+                    title: "Загадочная Муза", 
+                    desc: "Ты сегодня — тайна, которую хочется разгадывать вечно. Твоя нежность прячется за дымкой загадочности...",
+                    emoji: "🌙🎭"
+                },
+                { 
+                    title: "Сладкая Непоседа", 
+                    desc: "Ты как лучик солнца — тёплая, живая, игривая. С тобой хочется смеяться и дурачиться до утра!",
+                    emoji: "☀️🍭"
+                }
+            ];
+
+            // Состояние
+            let currentStep = 0;          // индекс текущего вопроса (0-4)
+            let resultIndex = 0;           // индекс результата (будет установлен на последнем вопросе)
+            let isFinished = false;         // завершен ли тест
+
+            const dynamicDiv = document.getElementById('dynamicContent');
+            const stepIndicator = document.getElementById('stepIndicator');
+
+            // Отрисовка точек-шагов
+            function renderSteps(activeStep) {
+                let dots = '';
+                for (let i = 0; i < questions.length; i++) {
+                    dots += `<div class="step-dot ${i === activeStep ? 'active' : ''}"></div>`;
+                }
+                stepIndicator.innerHTML = dots;
+            }
+
+            // Отрисовка вопроса по индексу
+            function renderQuestion(step) {
+                const q = questions[step];
+                let html = `
+                    <div class="question-area">
+                        <div class="question-text">
+                            <span class="question-emoji">${q.emoji}</span> ${q.text}
+                        </div>
+                        <div class="options-grid">
+                `;
+
+                q.options.forEach((opt, idx) => {
+                    html += `
+                        <div class="option-item" data-opt-index="${idx}" data-next="${opt.next !== undefined ? opt.next : ''}" data-result-index="${opt.result !== undefined ? opt.result : ''}">
+                            <span class="option-emoji">${opt.emoji}</span>
+                            <span>${opt.text}</span>
+                        </div>
+                    `;
+                });
+
+                html += `</div></div>`;
+                dynamicDiv.innerHTML = html;
+
+                // Навесить обработчики на option-item
+                document.querySelectorAll('.option-item').forEach(item => {
+                    item.addEventListener('click', function(e) {
+                        const next = this.dataset.next;
+                        const resultIdx = this.dataset.resultIndex;
+
+                        if (resultIdx !== '') {
+                            // Это последний вопрос, сохраняем результат и показываем финал
+                            resultIndex = parseInt(resultIdx);
+                            showFinalResult(resultIndex);
+                        } else if (next !== '') {
+                            // Переход к следующему вопросу
+                            currentStep = parseInt(next);
+                            renderQuestion(currentStep);
+                            renderSteps(currentStep);
+                        }
+                    });
+                });
+            }
+
+            // Финальный экран с результатом
+            function showFinalResult(resIdx) {
+                const res = results[resIdx];
+                isFinished = true;
+
+                const finalHtml = `
+                    <div class="result-area">
+                        <div class="result-badge">
+                            <div class="result-emoji-large">${res.emoji}</div>
+                            <div class="result-title">${res.title}</div>
+                            <div class="result-desc">${res.desc}</div>
+                            <div style="font-size: 2.5rem; margin: 10px 0;">🌸💖🌸</div>
+                            <button class="reset-button" id="resetTestBtn">💕 Пройти заново 💕</button>
+                        </div>
+                    </div>
+                `;
+                dynamicDiv.innerHTML = finalHtml;
+
+                // Скрыть шаги (или можно оставить, но лучше скрыть, так как тест завершён)
+                stepIndicator.innerHTML = ''; // убираем точки
+
+                // Кнопка сброса
+                document.getElementById('resetTestBtn').addEventListener('click', resetTest);
+            }
+
+            // Сброс теста в начало
+            function resetTest() {
+                currentStep = 0;
+                resultIndex = 0;
+                isFinished = false;
+
+                // Перестроить индикаторы
+                renderSteps(0);
+                // Показать первый вопрос
+                renderQuestion(0);
+            }
+
+            // Инициализация при загрузке
+            function initQuiz() {
+                resetTest(); // устанавливает начальное состояние
+            }
+
+            // Запуск
+            initQuiz();
+
+            // Дополнительный эффект: "переливающиеся" эмодзи и защита от случайных кликов, но все ок
+        })();
+    </script>
+</body>
+</html>
